@@ -15,8 +15,6 @@
 //    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 //
-#include <GLES2/gl2.h>
-//#include "nanovg.c"
 #ifndef NANOVG_GL_H
 #define NANOVG_GL_H
 
@@ -484,12 +482,12 @@ static int glnvg__createShader(GLNVGshader* shader, const char* name, const char
 
 static void glnvg__deleteShader(GLNVGshader* shader)
 {
-/**	if (shader->prog != 0)
+	if (shader->prog != 0)
 		glDeleteProgram(shader->prog);
 	if (shader->vert != 0)
 		glDeleteShader(shader->vert);
 	if (shader->frag != 0)
-		glDeleteShader(shader->frag);*/
+		glDeleteShader(shader->frag);
 }
 
 static void glnvg__getUniforms(GLNVGshader* shader)
@@ -988,9 +986,7 @@ static void glnvg__setUniforms(GLNVGcontext* gl, int uniformOffset, int image)
 	glBindBufferRange(GL_UNIFORM_BUFFER, GLNVG_FRAG_BINDING, gl->fragBuf, uniformOffset, sizeof(GLNVGfragUniforms));
 #else
 	GLNVGfragUniforms* frag = nvg__fragUniformPtr(gl, uniformOffset);
-/**
 	glUniform4fv(gl->shader.loc[GLNVG_LOC_FRAG], NANOVG_GL_UNIFORMARRAY_SIZE, &(frag->uniformArray[0][0]));
-*/
 #endif
 
 	if (image != 0) {

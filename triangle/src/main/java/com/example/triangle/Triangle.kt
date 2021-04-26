@@ -1,18 +1,9 @@
 package com.example.triangle
 
-import android.util.Log
-import androidx.annotation.Keep
-
-class Triangle{
-
+class Triangle {
 
     external fun draw(width: Float, height: Float, scale: Float, angle: Float)
-    external fun onRadSet(rad: Float)
-
-    @Keep
-    private fun updateRad(str: String){
-        Log.d("~~~~~ handler", str)
-    }
+    external fun onRadSet(listener: OnRadSetListener)
 
     companion object {
         init {

@@ -16,23 +16,28 @@
 #ifdef __APPLE__
 #include "OpenGLES/ES2/glext.h"
 #elif __ANDROID__
+
 #include <GLES2/gl2.h>
+
 #endif
 
-#include "nvg/nanovg.h"
+#include "nanovg.h"
 
-class Triangle{
-	typedef std::function<void(float)> RadCallback;
+class Triangle {
+    typedef std::function<void(float)> RadCallback;
 public:
-	void draw(float w, float h, float scale, float angle);
-	void setRadCallback(RadCallback radCallback);
+    void draw(float w, float h, float scale, float angle);
+
+    void setRadCallback(RadCallback radCallback);
+
 private:
-	RadCallback radCallback = nullptr;
-	bool nanovgInitialized = false;
-	NVGcontext* vg;
-	double degreesToRadians(double degree);
-	void prepareToDraw();
-	void drawRedRect();
+    RadCallback radCallback = nullptr;
+    bool nanovgInitialized = false;
+    NVGcontext *vg;
+
+    double degreesToRadians(double degree);
+
+    void prepareToDraw();
 };
 
 #endif /* Triangle_hpp */

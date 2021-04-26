@@ -1,9 +1,7 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
 
@@ -18,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.vp.adapter = object : FragmentStateAdapter(supportFragmentManager, lifecycle) {
-            override fun getItemCount() = 2
+            override fun getItemCount() = 1
             override fun createFragment(position: Int) = SurfaceFragment()
         }
     }
