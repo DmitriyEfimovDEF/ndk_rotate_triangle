@@ -10,8 +10,8 @@
 #include "nanovg_gl.h"
 #include "nanovg_gl_utils.h"
 
-#define TRIANGLE_HEIGHT 100
-#define TRIANGLE_WIDTH 120
+#define TRIANGLE_HEIGHT 250
+#define TRIANGLE_WIDTH 300
 
 void Triangle::prepareToDraw() {
     glClearColor(0.0f, 0.0f, 0.0f, 255.0f);

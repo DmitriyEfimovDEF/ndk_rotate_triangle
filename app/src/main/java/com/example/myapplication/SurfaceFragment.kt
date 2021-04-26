@@ -20,6 +20,14 @@ class SurfaceFragment : Fragment(R.layout.fragment_view_pager_item) {
     @Volatile
     private var angle: Float = 0F
 
+    private val callback = object : OnRadSetListener{
+        override fun onRadSetCall(rad: Float) {
+            requireActivity().runOnUiThread() {
+                binding?.tv?.text = rad.toString()
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,15 +42,7 @@ class SurfaceFragment : Fragment(R.layout.fragment_view_pager_item) {
             setEGLContextClientVersion(2)
             setRenderer(object : GLSurfaceView.Renderer {
                 override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-                    triangle = Triangle().also {
-                        it.onRadSet(object : OnRadSetListener{
-                            override fun onRadSetCall(rad: Float) {
-                                requireActivity().runOnUiThread() {
-                                    binding?.tv?.text = rad.toString()
-                                }
-                            }
-                        })
-                    }
+                    triangle = Triangle().also { it.onRadSet(callback) }
                 }
 
                 override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {}
