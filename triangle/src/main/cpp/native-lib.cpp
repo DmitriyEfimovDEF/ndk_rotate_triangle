@@ -27,46 +27,6 @@ typedef struct set_context {
 } SetContext;
 SetContext g_ctx;
 
-void queryRuntimeInfo(JNIEnv *env, jobject instance) {
-    // Find out which OS we are running on. It does not matter for this app
-    // just to demo how to call static functions.
-    // Our java JniHelper class id and instance are initialized when this
-    // shared lib got loaded, we just directly use them
-    //    static function does not need instance, so we just need to feed
-    //    class and method id to JNI
-//    jmethodID versionFunc = (*env).GetStaticMethodID(
-//            g_ctx.triangleClz,
-//            "getBuildVersion", "()Ljava/lang/String;");
-//    if (!versionFunc) {
-//        LOGE("Failed to retrieve getBuildVersion() methodID @ line %d",
-//             __LINE__);
-//        return;
-//    }
-//    auto buildVersion = static_cast<jstring>((*env).CallStaticObjectMethod(g_ctx.triangleClz, versionFunc)); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-//    const char *version = (*env).GetStringUTFChars(buildVersion, NULL);
-//    if (!version) {
-//        LOGE("Unable to get version string @ line %d", __LINE__);
-//        return;
-//    }
-//    LOGI("Android Version - %s", version);
-//    (*env).ReleaseStringUTFChars(buildVersion, version);
-//
-//    // we are called from JNI_OnLoad, so got to release LocalRef to avoid leaking
-//    (*env).DeleteLocalRef(buildVersion);
-//
-//    // Query available memory size from a non-static public function
-//    // we need use an instance of JniHelper class to call JNI
-//    jmethodID memFunc = (*env).GetMethodID(g_ctx.triangleClz,
-//                                            "getRuntimeMemorySize", "()J");
-//    if (!memFunc) {
-//        LOGE("Failed to retrieve getRuntimeMemorySize() methodID @ line %d",
-//             __LINE__);
-//        return;
-//    }
-//    jlong result = (*env).CallLongMethod(instance, memFunc);
-//    LOGI("Runtime free memory size: %" PRId64, result);
-//    (void)result;  // silence the compiler warning
-}
 
 extern "C"
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -82,7 +42,6 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     jobject handler = (env)->NewObject(g_ctx.triangleClz,
                                         triangleCtor);
     g_ctx.triangleObj = (env)->NewGlobalRef( handler);
-//    queryRuntimeInfo(env, g_ctx.triangleObj);
 
     g_ctx.done = 0;
     g_ctx.surfaceFragmentObj = NULL;
